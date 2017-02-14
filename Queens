@@ -1,0 +1,112 @@
+//Assignment 2   This code is from CS3 course at Suny New Paltz solving the classic Queens problem for any "n" number of queens. The output format was required at the time.
+// Justin Cody                                     
+//N03112028  
+//CPS315-01
+
+import java.util.*;
+import java.io.*;
+
+public class Queens
+{
+	private static int solutions;
+	private static int nin; //user input to determine n queens and board size(n by n)
+	
+		public static void main(String []args )
+		{
+			Input();
+			Solve(nin);
+			
+		}
+	
+	
+	public static void Input()
+	{
+		int ask = 0;
+		int hold;
+		Scanner input = new Scanner(System.in);
+		System.out.println("Find solutions for n number of queens on n by n board");
+		System.out.println("_____________________________________________________");
+		System.out.println("Enter a positive value for n, n should be 4 or larger");
+		while( ask != 1)
+		{
+			ask =0;
+			hold = input.nextInt();
+				if( hold >=4)
+				{
+					nin = hold;
+					ask = 1;
+					input.close();
+				}
+				else
+				{
+					System.out.println("!!! Please put in a value equal or greater then 4 !!!");
+				}
+		}
+		
+	}
+	
+	public static int Solve(int x)
+	{
+		Stack <Integer> stack = new Stack<Integer>();
+			for(int row = 0; row < x; row++)
+			{
+				for(int col=0; col< x; col++)
+				{
+					if(Conflict(row,col,stack)==false)
+					{
+						stack.push(col);
+						if(row == x-1)
+						{
+							Print(stack);
+							solutions++;
+						}
+						break;
+					}
+					else
+					{
+						if(col == x-1)
+						{
+							row = row -1;
+							col = stack.pop();
+						}
+					}
+				}
+			}
+		
+		return solutions;
+	}
+	
+	public static boolean Conflict(int r, int c, Stack <Integer> s)
+	{
+		
+		if(Diagonal() == true && column() == true)   //make methods for diagnal and column
+		{
+			
+		}
+	}
+		
+	public static void Print(Stack <Integer> s)
+	{
+		for(int i = 0; i < s.size(); i++)
+		{
+			for(int z = 0; z < s.size(); z++)
+			{
+			
+					if(z == s.get(i))
+					{
+						System.out.print("Q");
+					}
+					else
+					{
+						System.out.print("-");
+					}
+					
+			}
+			
+		}
+	}
+	
+	
+	}
+	
+
